@@ -1,4 +1,6 @@
 ARG BASE_IMAGE=quay.io/prometheus/golang-builder:1.23-base
+
+FROM $BASE_IMAGE
+
 ARG ARCH
 ARG OS
-FROM $BASE_IMAGE
