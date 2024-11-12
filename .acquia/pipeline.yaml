@@ -9,6 +9,9 @@ validate_config: true
 environment_image:
   file: ".acquia/Dockerfile.ci"
   context: "."
+  build_args:
+    - "ARCHE=$ARCHE"
+    - "OS=$OS"
 
 pre_build:
   code_analysis:
@@ -16,14 +19,17 @@ pre_build:
   build_binary:
     - steps:
       - |
-        make common-build PREFIX=.build/linux-amd64
-        mv .build/linux-amd64/devops-blackbox-exporter .build/linux-amd64/blackbox_exporter
+        make common-build PREFIX=.build/${OS}-${ARCH}
+        mv .build/${OS}-${ARCH}/devops-blackbox-exporter .build/${OS}-${ARCH}/blackbox_exporter
 
 build:
   service_image:
     - name: devops-blackbox-exporter
       file: "Dockerfile"
       context: "."
+      build_args:
+        - "ARCHE=$ARCHE"
+        - "OS=$OS"
 
 # This step performs container image security scan in Jfrog Xray via Artifactory
 # Build will fail whenever a vulnerability is found unless set to true
