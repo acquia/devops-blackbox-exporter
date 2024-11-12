@@ -16,7 +16,7 @@ pre_build:
   build_binary:
     - steps:
       - |
-        make common-build PREFIX=.build/${OS}-${ARCH}
+        make common-build PREFIX=.build/linux-amd64
 
 build:
   service_image:
