@@ -10,8 +10,8 @@ environment_image:
   file: ".acquia/Dockerfile.ci"
   context: "."
   build_args:
-    - "ARCHE=$ARCHE"
-    - "OS=$OS"
+    - "ARCHE=${ARCHE}"
+    - "OS=${OS}"
 
 pre_build:
   code_analysis:
@@ -28,8 +28,8 @@ build:
       file: "Dockerfile"
       context: "."
       build_args:
-        - "ARCHE=$ARCHE"
-        - "OS=$OS"
+        - "ARCHE=${ARCHE}"
+        - "OS=${OS}"
 
 # This step performs container image security scan in Jfrog Xray via Artifactory
 # Build will fail whenever a vulnerability is found unless set to true
