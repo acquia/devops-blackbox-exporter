@@ -10,6 +10,14 @@ environment_image:
   file: ".acquia/Dockerfile.ci"
   context: "."
 
+pre_build:
+  code_analysis:
+    required: false
+  build_binary:
+    - steps:
+      - |
+        make common-build PREFIX=.build/${OS}-${ARCH}
+
 build:
   service_image:
     - name: devops-blackbox-exporter
