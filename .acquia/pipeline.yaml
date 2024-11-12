@@ -17,6 +17,7 @@ pre_build:
     - steps:
       - |
         make common-build PREFIX=.build/linux-amd64
+        mv .build/linux-amd64/devops-blackbox-exporter .build/linux-amd64/blackbox_exporter
 
 build:
   service_image:
