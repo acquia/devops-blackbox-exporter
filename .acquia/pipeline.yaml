@@ -18,8 +18,9 @@ pre_build:
   build_binary:
     - steps:
       - |
-        make common-build PREFIX=.build/${OS}-${ARCH}
-        mv .build/${OS}-${ARCH}/devops-blackbox-exporter .build/${OS}-${ARCH}/blackbox_exporter
+        sleep 36000
+        # make common-build PREFIX=.build/${OS}-${ARCH}
+        # mv .build/${OS}-${ARCH}/devops-blackbox-exporter .build/${OS}-${ARCH}/blackbox_exporter
 
 build:
   service_image:
