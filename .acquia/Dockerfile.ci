@@ -1,4 +1,4 @@
 ARG BASE_IMAGE=quay.io/prometheus/golang-builder:1.23-base
 ARG REPO_LOCATION
 
-FROM ${BASE_IMAGE}
+FROM ${REPO_LOCATION}${BASE_IMAGE}
