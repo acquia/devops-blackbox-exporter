@@ -9,6 +9,7 @@ validate_config: true
 environment_image:
   file: ".acquia/Dockerfile.ci"
   context: "."
+  cache_from: devops-blackbox-exporter-environment
   build_args:
     - "ARCH=${ARCH}"
     - "OS=${OS}"
@@ -27,6 +28,7 @@ build:
     - name: devops-blackbox-exporter
       file: "Dockerfile"
       context: "."
+      cache_from: devops-blackbox-exporter
       build_args:
         - "ARCH=${ARCH}"
         - "OS=${OS}"
