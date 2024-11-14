@@ -11,6 +11,8 @@ environment_image:
   file: ".acquia/Dockerfile.ci"
   context: "."
   cache_from: devops-blackbox-exporter-environment
+  build_args:
+    - "BASE_IMAGE=${ENVIRONMENT_BASE_IMAGE}"
 
 pre_build:
   code_analysis:

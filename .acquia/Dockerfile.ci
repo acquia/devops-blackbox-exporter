@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=devops-blackbox-exporter/prometheus/golang-builder:1.23-base
+ARG BASE_IMAGE
 ARG REPO_LOCATION
 
 FROM ${REPO_LOCATION}${BASE_IMAGE}
