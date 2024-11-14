@@ -1,0 +1,40 @@
+type: default
+team: platauto
+group: platform
+service: blackbox-exporter
+
+# Validate the formatting of the pipeline.yaml file.
+validate_config: true
+
+environment_image:
+  name: devops-blackbox-exporter-environment
+  file: ".acquia/Dockerfile.ci"
+  context: "."
+  cache_from: devops-blackbox-exporter-environment
+  build_args:
+    - "BASE_IMAGE=${ENVIRONMENT_BASE_IMAGE}"
+
+pre_build:
+  code_analysis:
+    required: false
+  build_binary:
+    - steps:
+      - |
+        make common-build PREFIX=.build/${OS}-${ARCH}
+        mv .build/${OS}-${ARCH}/devops-blackbox-exporter .build/${OS}-${ARCH}/blackbox_exporter
+
+build:
+  service_image:
+    - name: devops-blackbox-exporter
+      file: "Dockerfile"
+      context: "."
+      cache_from: devops-blackbox-exporter
+      build_args:
+        - "ARCH=${ARCH}"
+        - "OS=${OS}"
+
+# This step performs container image security scan in Jfrog Xray via Artifactory
+# Build will fail whenever a vulnerability is found unless set to true
+security_scan:
+  scanner: orca
+  ignore_failures: false
